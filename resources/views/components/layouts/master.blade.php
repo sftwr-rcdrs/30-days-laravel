@@ -5,16 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>@yield('title')</title>
+    <title>Software Recorders PH {{ $title ?? '|' . config('app.name') }}</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 
 <body>
-    @include('includes.navbar')
+    <x-layouts.navbar />
+    
     <main>
-        @yield('content')
+        {{ $slot }}
     </main>
-    @include('includes.footer')
+    
+    <x-layouts.footer />
 </body>
 
 </html>

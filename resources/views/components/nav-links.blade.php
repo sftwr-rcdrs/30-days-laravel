@@ -1,4 +1,12 @@
-@props(['linkl'])
+@props(['href'])
+
+@php
+    $isActive = request()->is(ltrim($href, '/'));
+@endphp
+
 <li>
-    <a {{ $attributes }}>{{ $slot }}</a>
+    <a href="{{ $href }}" 
+       {{ $attributes->merge(['class' => $isActive ? 'active' : '']) }}>
+        {{ $slot }}
+    </a>
 </li>

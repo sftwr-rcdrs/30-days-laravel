@@ -4,43 +4,43 @@ namespace App\Models;
 
 class Product
 {
-    public static function allProduct(): array
+    public static function allProduct(): \Illuminate\Support\Collection
     {
-        return [
-            [
+        return collect([
+            (object) [
                 'id' => 1,
                 'category_name' => 'Laptop',
                 'model_name' => 'Inspiran',
                 'brand' => 'Dell',
                 'price' => 50000
             ],
-            [
+            (object) [
                 'id' => 2,
                 'category_name' => 'Mobile',
                 'model_name' => 'Galaxy',
                 'brand' => 'Samsung',
                 'price' => 10000
             ],
-            [
+            (object) [
                 'id' => 3,
                 'category_name' => 'Tablet',
                 'model_name' => 'iPad',
                 'brand' => 'Apple',
-                'price' => '30000'
+                'price' => 30000
             ],
-            [
+            (object) [
                 'id' => 4,
                 'category_name' => 'Smart Watch',
                 'model_name' => 'Watch 6',
                 'brand' => 'Realme',
                 'price' => 5000
             ]
-        ];
+        ]);
     }
 
-    public static function find(int $id): array
+    public static function find(int $id): \stdClass
     {
-        $product = \Illuminate\Support\Arr::first(static::allProduct(), fn($product) => $product['id'] == $id);
+        $product = self::allProduct()->firstWhere('id', $id);
 
         if (!$product) {
             abort(404);

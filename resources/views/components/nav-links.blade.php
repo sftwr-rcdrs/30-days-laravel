@@ -1,4 +1,7 @@
-@props(['linkl'])
-<li>
+@props(['active' => false, 'isButton' => 'a'])
+
+@if ($isButton === 'a')
     <a {{ $attributes }}>{{ $slot }}</a>
-</li>
+@else
+    <button {{ $attributes }}>{{ $slot }}</button>
+@endif

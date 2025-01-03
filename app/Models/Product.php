@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
-class Product
+use Illuminate\Database\Eloquent\Model;
+
+class Product extends Model
 {
     public static function allProduct(): \Illuminate\Support\Collection
     {
@@ -49,4 +51,12 @@ class Product
         return $product;
 
     }
+
+    protected $table = "products";
+    protected $fillable = [
+        'category_name',
+        'model_name',
+        'brand',
+        'price'
+    ];
 }

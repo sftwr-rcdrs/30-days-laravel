@@ -5,9 +5,12 @@
         <p>This is the home page content.</p>
 
         @php
-            $properties = ['id', 'model_name', 'category_name', 'brand', 'price'];
+            $properties = ['id', 'model_name', 'brand', 'price'];
+            $table_headers = ['ID', 'Model Name', 'Brand', 'Price', 'Supplier Name', 'Category Name', 'Actions'];
+            $extra_models = ['supplier', 'category'];
         @endphp
 
-        <x-base-table-data item_name="products" :items="$products" :item_properties="$properties" />
+        <x-base-table-data :table_headers="$table_headers" :extra_models="$extra_models" item_name="products" :items="$products"
+            :item_properties="$properties" />
     </section>
 </x-layouts.master>

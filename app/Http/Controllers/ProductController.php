@@ -9,7 +9,12 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::allProduct();
+        $products = Product::all();
+
+        // foreach ($products as $product) {
+        //     $supplier = $product->supplier;
+        //     $product->supplier_name = $supplier->name;
+        // }
 
         return view('products', compact('products'));
     }

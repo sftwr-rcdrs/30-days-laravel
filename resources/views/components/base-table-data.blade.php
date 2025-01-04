@@ -1,4 +1,4 @@
-@props(['items', 'item_name', 'item_properties'])
+@props(['items', 'item_name', 'item_properties', 'extra_models', 'table_headers'])
 
 <div class="table-wrapper">
     <table class="table">
@@ -6,13 +6,17 @@
             <tr>
                 <th>#</th>
 
-                @foreach ($item_properties as $property)
-
-                    <th>{{ $property }}</th>
-                    
+                @foreach ($table_headers as $table_header)
+                    <th>{{ $table_header }}</th>
                 @endforeach
-                
-                <th>Actions</th>
+
+                {{-- @foreach ($extra_models as $extra_model)
+                    @foreach ($items[0]->$extra_model->getAttributes() as $key => $value)
+                        @if ($loop->iteration == 2)
+                            <th>{{ $extra_model . '_' . $key }}</th>
+                        @endif
+                    @endforeach
+                @endforeach --}}
             </tr>
         </thead>
         <tbody>
@@ -23,29 +27,29 @@
                 </tr>
             @else
                 @foreach ($items as $item)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
 
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
+                        @foreach ($item_properties as $property)
+                            @if (!is_numeric($item->$property))
+                                <td>{{ $item->$property }}</td>
+                            @else
+                                <td>{{ number_format($item->$property) }}</td>
+                            @endif
+                        @endforeach
 
-                    @foreach ($item_properties as $property)
+                        @foreach ($extra_models as $extra_model)
+                            @foreach ($items[0]->$extra_model->getAttributes() as $key => $value)
+                                @if ($loop->iteration == 2)
+                                    <td>{{ $item->$extra_model->$key }}</td>
+                                @endif
+                            @endforeach
+                        @endforeach
 
-                    @if (!is_numeric($item->$property))
-
-                        <td>{{ $item->$property }}</td>
-
-                    @else
-
-                        <td>{{ number_format($item->$property) }}</td>
-
-                    @endif
-
-                    @endforeach
-
-                    <td>
-                        <a href="{{ route("$item_name.show", ['id' => $item->id]) }}">Show</a>
-                    </td>
-                </tr>
-
+                        <td>
+                            <a href="{{ route("$item_name.show", ['id' => $item->id]) }}">Show</a>
+                        </td>
+                    </tr>
                 @endforeach
             @endif
 

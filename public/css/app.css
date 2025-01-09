@@ -26,6 +26,10 @@ body {
 
 }
 
+.mt-30px {
+    margin-top: 30px;
+}
+
 
 
 
@@ -216,6 +220,10 @@ body {
     color: var(--clr-secondary);
 }
 
+.table-wrapper .table td.span-count {
+    text-align: center;
+}
+
 .table-wrapper .table th,
 .table-wrapper .table td {
     text-align: left;
@@ -226,6 +234,46 @@ body {
 .table-wrapper .table tr:nth-child(even) {
     background-color: var(--clr-extra);
 }
+
+
+
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+.pagination li {
+    margin: 0 5px;
+}
+
+.pagination li a,
+.pagination li span {
+    padding: 8px 12px;
+    text-decoration: none;
+    color: var(--clr-primary);
+    border: 1px solid var(--clr-primary);
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.pagination li a:hover {
+    background-color: var(--clr-secondary);
+}
+
+.pagination li.active span {
+    background-color: var(--clr-secondary);
+    color: var(--clr-white);
+    border-color: var(--clr-secondary);
+}
+
+.pagination li.disabled span {
+    color: #ccc;
+    pointer-events: none;
+    cursor: disabled;
+}
+
+
 
 /* ============== TABLE (END) ===================== */
 

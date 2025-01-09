@@ -1,4 +1,4 @@
-@props(['items', 'item_name', 'item_properties', 'extra_models', 'table_headers'])
+@props(['items', 'item_name', 'item_properties', 'extra_models', 'table_headers', 'isPaginate' => false])
 
 <div class="table-wrapper">
     <table class="table">
@@ -21,9 +21,9 @@
         </thead>
         <tbody>
 
-            @if ($items->count() === 0)
+            @if (empty($items))
                 <tr>
-                    <td colspan="6">No data found</td>
+                    <td class="span-count" colspan="{{ count($table_headers) + 1 }}">No data found</td>
                 </tr>
             @else
                 @foreach ($items as $item)
@@ -55,4 +55,72 @@
 
         </tbody>
     </table>
+
+</div>
+
+
+
+</div>
+
+
+<div>
+    @if (!$isPaginate)
+        <p>No pagination</p>
+    @else
+        <div class="pagination-wrapper">
+            @if ($items->count() > 0 && $items->hasPages())
+                <!-- Check if there are items and pagination exists -->
+                <nav>
+                    <ul class="pagination">
+                        {{-- Previous Page Link --}}
+
+                        @if ($items->onFirstPage())
+                            <li class="disabled"><span>&laquo; Previous</span></li>
+                        @else
+                            <li><a href="{{ $items->previousPageUrl() }}" rel="prev">&laquo; Previous</a></li>
+                        @endif
+
+                        {{-- Page Numbers --}}
+
+                        {{-- @foreach (range(1, $items->lastPage()) as $page)
+                        @if ($page == $items->currentPage())
+                            <li class="active"><span>{{ $page }}</span></li>
+                        @else
+                            <li><a href="{{ $items->url($page) }}">{{ $page }}</a></li>
+                        @endif
+                    @endforeach --}}
+
+                        {{-- Next Page Link --}}
+
+                        @if ($items->hasMorePages())
+                            <li><a href="{{ $items->nextPageUrl() }}" rel="next">Next &raquo;</a></li>
+                        @else
+                            <li class="disabled"><span>Next &raquo;</span></li>
+                        @endif
+                    </ul>
+                </nav>
+
+                {{-- Showing X to Y of Z results --}}
+                <div class="pagination-info mt-30px">
+                    <p>Showing
+                        @if ($items->currentPage() * $items->perPage() > $items->total())
+                            {{ $items->total() }}
+                        @else
+                            {{ ($items->currentPage() - 1) * $items->perPage() + 1 }}
+                        @endif
+                        to
+                        @if ($items->currentPage() * $items->perPage() > $items->total())
+                            {{ $items->total() }}
+                        @else
+                            {{ $items->currentPage() * $items->perPage() }}
+                        @endif
+                        of {{ $items->total() }} results.
+                    </p>
+                </div>
+            @endif
+        </div>
+    @endif
+
+
+
 </div>

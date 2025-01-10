@@ -1,4 +1,4 @@
-@props(['items', 'item_name', 'item_properties', 'extra_models', 'table_headers', 'isPaginate' => false])
+@props(['items', 'route_name', 'item_properties', 'extra_models', 'table_headers', 'isPaginate' => false])
 
 <div class="table-wrapper">
     <table class="table">
@@ -20,7 +20,6 @@
             </tr>
         </thead>
         <tbody>
-
             @if (empty($items))
                 <tr>
                     <td class="span-count" colspan="{{ count($table_headers) + 1 }}">No data found</td>
@@ -47,7 +46,8 @@
                         @endforeach
 
                         <td>
-                            <a href="{{ route("$item_name.show", ['id' => $item->id]) }}">Show</a>
+                            <a href="{{ route("$route_name.show", ['id' => $item->id]) }}">Show</a>
+                            <a href="{{ route("$route_name.delete", ['id' => $item->id]) }}">Delete</a>
                         </td>
                     </tr>
                 @endforeach
@@ -55,17 +55,11 @@
 
         </tbody>
     </table>
-
 </div>
-
-
-
 </div>
-
-
 <div>
     @if (!$isPaginate)
-        <p>No pagination</p>
+        {{-- <p>No pagination</p> --}}
     @else
         <div class="pagination-wrapper">
             @if ($items->count() > 0 && $items->hasPages())
@@ -75,9 +69,9 @@
                         {{-- Previous Page Link --}}
 
                         @if ($items->onFirstPage())
-                            <li class="disabled"><span>&laquo; Previous</span></li>
+                            <li class="disabled"><span>&laquo; Back</span></li>
                         @else
-                            <li><a href="{{ $items->previousPageUrl() }}" rel="prev">&laquo; Previous</a></li>
+                            <li><a href="{{ $items->previousPageUrl() }}" rel="prev">&laquo; Back</a></li>
                         @endif
 
                         {{-- Page Numbers --}}

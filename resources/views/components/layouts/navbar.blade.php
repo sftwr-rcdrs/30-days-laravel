@@ -8,10 +8,10 @@
                 <x-nav-link href="/">Home</x-nav-link>
             </li>
             <li>
-                <x-nav-link href="{{ route('products') }}">Products</x-nav-link>
+                <x-nav-link href="{{ route('products.index') }}">Products</x-nav-link>
             </li>
             <li>
-                <x-nav-link href="{{ route('categories') }}">Categories</x-nav-link>
+                <x-nav-link href="{{ route('categories.index') }}">Categories</x-nav-link>
             </li>
 
         </ul>
@@ -25,10 +25,10 @@
                 <x-nav-link href="/">Home</x-nav-link>
             </li>
             <li>
-                <x-nav-link href="{{ route('products') }}">Products</x-nav-link>
+                <x-nav-link href="{{ route('products.index') }}">Products</x-nav-link>
             </li>
             <li>
-                <x-nav-link href="{{ route('categories') }}">Categories</x-nav-link>
+                <x-nav-link href="{{ route('categories.index') }}">Categories</x-nav-link>
             </li>
 
         </ul>

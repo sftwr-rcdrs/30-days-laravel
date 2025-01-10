@@ -9,7 +9,12 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::allProduct();
+        $products = Product::with(['supplier', 'category'])->paginate(10);
+
+        // foreach ($products as $product) {
+        //     $supplier = $product->supplier;
+        //     $product->supplier_name = $supplier->name;
+        // }
 
         return view('products', compact('products'));
     }
